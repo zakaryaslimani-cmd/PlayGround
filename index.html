@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#07131c" />
+  <title>BREAKWATER — Tactical Arena</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="game-root">
+    <canvas id="game-canvas"></canvas>
+    <div class="vignette"></div>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Breakwater home"><span class="brand-mark"><i></i><i></i><i></i></span><span>BREAK<span class="brand-light">WATER</span><small>TACTICAL ARENA</small></span></a>
+      <div class="top-status"><span class="live-dot"></span> LIVE OPERATION <span class="status-divider"></span> <span id="clock">14:32</span></div>
+      <button id="sound-btn" class="icon-btn" aria-label="Toggle sound"><span>♫</span></button>
+    </header>
+
+    <section id="scoreboard" class="scoreboard hidden" aria-label="Match score">
+      <div class="team-score blue-score"><span class="score-label">HARBOR</span><strong id="blue-score">000</strong></div>
+      <div class="match-center"><span class="match-mode">TEAM ELIMINATION</span><div class="match-progress"><i id="blue-progress"></i><i id="red-progress"></i></div><span class="match-round">FIRST TO 100</span></div>
+      <div class="team-score red-score"><span class="score-label">RAIDERS</span><strong id="red-score">000</strong></div>
+    </section>
+
+    <aside id="killfeed" class="killfeed"></aside>
+    <div id="crosshair" class="crosshair hidden"><i></i><i></i><i></i><i></i><b></b></div>
+
+    <section id="start-screen" class="screen-shell">
+      <div class="start-layout">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> OPERATION 07 / NORTH ATLANTIC</div>
+          <h1>OWN THE<br><em>BREAKWATER.</em></h1>
+          <p class="hero-text">A contested island. Twenty operators.<br>One team controls the tide.</p>
+          <div class="hero-meta"><div><span class="meta-icon">◉</span><b>10 <small>VS</small> 10</b><span>FULL SQUADS</span></div><div><span class="meta-icon">⌁</span><b>100</b><span>ARSENAL PICKS</span></div></div>
+          <div class="hero-actions"><button id="deploy-btn" class="primary-btn"><span>DEPLOY TO ISLAND</span><b>↗</b></button><span class="action-note">NO DOWNLOAD REQUIRED</span></div>
+        </div>
+        <div class="lobby-panel">
+          <div class="panel-top"><div><span class="panel-kicker">YOUR OPERATOR</span><h2>SELECT A CALLSIGN</h2></div><div class="squad-count"><span class="live-dot"></span> 20 / 20 <small>READY</small></div></div>
+          <div id="character-grid" class="character-grid"></div>
+          <div class="operator-detail"><div class="operator-avatar" id="operator-avatar">01</div><div class="operator-info"><b id="operator-name">NOVA “TIDE” KIM</b><span id="operator-role">SCOUT · HARBOR SQUAD</span></div><div class="operator-rating"><span>COMBAT RATING</span><b id="operator-rating">A</b></div></div>
+          <div class="roster-note"><span>◈</span> 20 UNIQUE OPERATORS · NO DUPLICATE CALLSIGNS</div>
+        </div>
+      </div>
+      <div class="start-footer"><span>BREAKWATER ISLAND · NORTH ATLANTIC</span><span>TACTICAL SIMULATION <i>●</i> BUILD 1.07</span></div>
+    </section>
+
+    <section id="weapon-screen" class="screen-shell hidden">
+      <div class="arsenal-layout">
+        <div class="arsenal-heading"><div class="eyebrow"><span class="eyebrow-line"></span> FIELD ARMORY / 100 AVAILABLE</div><h1>CHOOSE YOUR<br><em>LOADOUT.</em></h1><p>Every weapon is tuned for a different kind of fight.</p></div>
+        <div class="arsenal-panel">
+          <div class="arsenal-tabs"><span>PRIMARY WEAPON</span><span class="weapon-total">01 <i>/</i> 100</span></div>
+          <div class="weapon-feature"><div class="weapon-art"><div class="weapon-glow"></div><div class="weapon-illustration"><i class="gun-stock"></i><i class="gun-body"></i><i class="gun-barrel"></i><i class="gun-sight"></i><i class="gun-mag"></i></div><span id="weapon-index-art">BW—01</span></div><div class="weapon-info"><span id="weapon-type" class="weapon-type">ASSAULT RIFLE</span><h2 id="weapon-name">VANGUARD 5.56</h2><p id="weapon-desc">Balanced, reliable, and built to hold the line.</p><div class="weapon-stats"><div><span>DAMAGE</span><i><b id="stat-damage"></b></i></div><div><span>CONTROL</span><i><b id="stat-control"></b></i></div><div><span>FIRE RATE</span><i><b id="stat-rate"></b></i></div></div><div class="weapon-controls"><button id="weapon-prev" class="round-btn" aria-label="Previous weapon">←</button><div class="weapon-pips" id="weapon-pips"></div><button id="weapon-next" class="round-btn" aria-label="Next weapon">→</button></div></div></div>
+          <div class="arsenal-footer"><span><b>100</b> UNIQUE WEAPON CONFIGURATIONS</span><span>USE ← → TO BROWSE</span></div>
+        </div>
+        <button id="match-btn" class="primary-btn match-btn"><span>ENTER THE FIGHT</span><b>↗</b></button>
+        <div class="arsenal-back" id="back-to-operator">← BACK TO OPERATOR</div>
+      </div>
+    </section>
+
+    <section id="end-screen" class="screen-shell hidden"><div class="end-card"><div class="eyebrow"><span class="eyebrow-line"></span> OPERATION COMPLETE</div><h1 id="end-title">ISLAND<br><em>SECURED.</em></h1><p id="end-copy">Your squad owned the breakwater.</p><div class="end-stats"><div><b id="end-kills">00</b><span>ELIMINATIONS</span></div><div><b id="end-score">100</b><span>TEAM SCORE</span></div><div><b id="end-weapon">01</b><span>LOADOUT</span></div></div><button id="play-again" class="primary-btn"><span>DEPLOY AGAIN</span><b>↗</b></button></div></section>
+
+    <section id="hud" class="hud hidden">
+      <div class="hud-top-left"><div class="objective-chip"><span class="objective-icon">◈</span><div><b>SECURE THE ISLAND</b><small>ELIMINATE ENEMY OPERATORS</small></div></div></div>
+      <div class="hud-top-right"><div class="alive-pill"><span class="live-dot"></span><b id="alive-blue">10</b> <i>VS</i> <b id="alive-red">10</b><small>IN PLAY</small></div><button id="pause-btn" class="pause-btn" aria-label="Pause">Ⅱ</button></div>
+      <div class="damage-flash" id="damage-flash"></div>
+      <div class="hud-bottom-left"><div class="health-emblem">+</div><div class="health-content"><div><span>VITALS</span><b id="health-value">100</b></div><div class="health-track"><i id="health-bar"></i></div></div><div class="armor-content"><span>ARMOR</span><div class="armor-dots"><i></i><i></i><i></i></div></div></div>
+      <div class="hud-bottom-right"><div class="weapon-label"><span id="hud-weapon-type">ASSAULT RIFLE</span><b id="hud-weapon-name">VANGUARD 5.56</b></div><div class="ammo-count"><b id="ammo-now">30</b><span>/ <i id="ammo-reserve">120</i></span><small>AMMO</small></div><div class="reload-line" id="reload-line"></div></div>
+      <div class="touch-controls" id="touch-controls"><div class="touch-stick" id="touch-stick"><span class="stick-knob"></span></div><div class="touch-actions"><button id="touch-reload">↻<small>RELOAD</small></button><button id="touch-fire">◎<small>FIRE</small></button><button id="touch-jump">↑<small>JUMP</small></button></div></div>
+      <div class="desktop-hints"><span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> MOVE</span><span><kbd>SHIFT</kbd> SPRINT</span><span><kbd>SPACE</kbd> JUMP</span><span><kbd>R</kbd> RELOAD</span><span><kbd>ESC</kbd> PAUSE</span></div>
+    </section>
+
+    <section id="pause-screen" class="screen-shell hidden"><div class="pause-card"><span class="panel-kicker">FIELD REPORT</span><h2>PAUSED</h2><p>Take a breath, operator.</p><button id="resume-btn" class="primary-btn"><span>BACK TO THE FIGHT</span><b>↗</b></button><button id="quit-btn" class="quiet-btn">ABANDON OPERATION</button></div></section>
+    <div class="toast" id="toast"></div>
+    <div class="loader" id="loader"><div class="loader-mark"><i></i><i></i><i></i></div><span>PREPARING THE ISLAND</span><i class="loader-track"><b></b></i></div>
+  </div>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"}}</script>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
